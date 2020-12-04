@@ -46,6 +46,7 @@ function dcms_list_data($content)
 			$result .= '<tr>
 				<td>' . $item->nombre_solapa . '</td>
 				<td><a href="' . $item->url_opcion . '">' . $item->nombre_opcion . '<a></td>
+				<td>usuario -> '.$_SESSION["user"].'</td>
 			</tr>';
 		}
 
@@ -53,7 +54,6 @@ function dcms_list_data($content)
 			          <tr>
 			            <th>ID</th>
 			            <th>Nombre</th>
-			            <th>Variedad</th>
 			          </tr>
 			          {data}
 			        </table>';
