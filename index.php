@@ -1,12 +1,12 @@
 <?php
-/*include 'databaseConnect.php';
+include 'databaseConnect.php';
 include_once 'controller.php';
 session_start();
 ModeloUserDB::init();
 
 if (!isset($_SESSION['user'])) {
   CtlLogin();
-} else {*/
+} else {
   /**
    * Front to the WordPress application. This file doesn't do anything, but loads
    * wp-blog-header.php which does and tells WordPress to load the theme.
@@ -23,4 +23,4 @@ if (!isset($_SESSION['user'])) {
 
   /** Loads the WordPress Environment and Template */
   require __DIR__ . '/wp-blog-header.php';
-//}
+}
