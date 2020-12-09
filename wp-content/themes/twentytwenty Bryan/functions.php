@@ -777,19 +777,19 @@ function dcms_list_data($content)
 {
 	$slug_page = 'gestionar'; //slug de la página en donde se mostrará la tabla
 	$table_name = 'paginas_portal'; // nombre de la tabla
-	$dbuser     = defined('DB_USER') ? DB_USER : '';
-	$dbpassword = defined('DB_PASSWORD') ? DB_PASSWORD : '';
+	$dbuser     = 'system';
+	$dbpassword = 'capote';
 	$dbname     = 'apoyo_luxenter';
-	$dbhost     = defined('DB_HOST') ? DB_HOST : '';
+	$dbhost     = '82.223.11.63';
 
 	$wpdb = new wpdb($dbuser, $dbpassword, $dbname, $dbhost);
 
 	if (is_page($slug_page)) {
 		/* Llamamos ala funcion obtener tiendaa pasandole el parametro session user para obtener el numero de tienda */
 		$tienda_usuario = obtener_tienda($_SESSION["user"]);
-		//var_dump($tienda_usuario);
+		var_dump($tienda_usuario);
 
-		$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = $tienda_usuario");
+		$items = $wpdb->get_results("SELECT * FROM paginas_portal where id_tienda = 1");
 		$result = '';
 
 		// var_dump($items);
