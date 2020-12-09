@@ -195,6 +195,9 @@ function twentytwenty_register_styles()
 	// Add print CSS.
 	wp_enqueue_style('twentytwenty-print-style', get_template_directory_uri() . '/print.css', null, $theme_version, 'print');
 
+	// Add print CSS.
+	wp_enqueue_style('style_bootstrap', get_template_directory_uri() . '/style_bootstrap.css');
+
 	//Estilo Bootstrap
 	wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 }
@@ -791,11 +794,24 @@ function dcms_list_data($content)
 		/* Llamamos a la funcion obtener tienda pasandole el parametro session user para obtener el id_tienda */
 		$tienda_usuario = obtener_tienda($_SESSION["user"]);
 
-		$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = $tienda_usuario");
+		$items = $wpdb->get_results("SELECT DISTINCT nombre_solapa FROM $table_name where id_tienda = $tienda_usuario");
 		$result = '';
+		$template = '<div class="container text-white">
+		<div class="row">';
 
-		// var_dump($items);
+		//var_dump($items);
+
+		foreach ($items as $item) {
+			$template .= '
+					  <div class="col-6 text-center div-categorias"><button class="btn btn_categoria m-1">' . $item->nombre_solapa . '</button></div>
+			';
+		}
+		$template .= '</div>
+						
+					</div>';
+
 		// nombre de los campos de la tabla
+		$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = $tienda_usuario");
 		foreach ($items as $item) {
 			$result .= '<div class="row">
 				<div class="col-12 text-center">' . $item->nombre_solapa . '</div>
@@ -803,20 +819,10 @@ function dcms_list_data($content)
 				</div>';
 		}
 
-		$template = '<div class="container text-white">
-			          <div class="row">
-			            <div class="col-9">Nombre_solapa</div>
-			            <div class="col-3 text-center">link</div>
-					  </div>
-					  
-					  {data}
-					  
-			        </div>';
-
-		return $content . str_replace('{data}', $result, $template);
+		return $content .  $template;
 	}
 
-	return $content;
+	return $$content;
 }
 
 function obtener_tienda($user)

@@ -1,0 +1,11 @@
+.btn_categoria{
+	font-size: 2rem !important;
+	width: 100%;
+	height: 90%;
+	color: #314A6C;
+	background-color: white;
+}
+
+.div-categorias{
+	height: 10vh;
+}
