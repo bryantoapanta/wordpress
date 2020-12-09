@@ -2419,17 +2419,17 @@ body:not(.singular) main > article:first-of-type {
 
 h1.entry-title,
 h2.entry-title {
-	margin: 0;
+	margin: 0 !important;
 }
 
 .entry-title a {
-	color: inherit;
-	text-decoration: none;
+	color: inherit !important;
+	text-decoration: none !important;
 }
 
 .entry-title a:focus,
 .entry-title a:hover {
-	text-decoration: underline;
+	text-decoration: underline !important;
 }
 
 .intro-text {
@@ -5007,7 +5007,7 @@ a.to-the-top > * {
 	}
 
 	h2.entry-title {
-		font-size: 6.4rem;
+		font-size: 6.4rem !important;
 	}
 
 	/* SEARCH RESULTS */

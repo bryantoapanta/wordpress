@@ -194,6 +194,9 @@ function twentytwenty_register_styles()
 
 	// Add print CSS.
 	wp_enqueue_style('twentytwenty-print-style', get_template_directory_uri() . '/print.css', null, $theme_version, 'print');
+
+	//Estilo Bootstrap
+	wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 }
 
 add_action('wp_enqueue_scripts', 'twentytwenty_register_styles');
@@ -785,30 +788,30 @@ function dcms_list_data($content)
 	$wpdb = new wpdb($dbuser, $dbpassword, $dbname, $dbhost);
 
 	if (is_page($slug_page)) {
-		/* Llamamos ala funcion obtener tiendaa pasandole el parametro session user para obtener el numero de tienda */
+		/* Llamamos a la funcion obtener tienda pasandole el parametro session user para obtener el id_tienda */
 		$tienda_usuario = obtener_tienda($_SESSION["user"]);
-		var_dump($tienda_usuario);
 
-		$items = $wpdb->get_results("SELECT * FROM paginas_portal where id_tienda = 1");
+		$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = $tienda_usuario");
 		$result = '';
 
 		// var_dump($items);
 		// nombre de los campos de la tabla
 		foreach ($items as $item) {
-			$result .= '<tr>
-				<td>' . $item->nombre_solapa . '</td>
-				<td><a href="' . $item->url_opcion . '">' . $item->nombre_opcion . '<a></td>
-				<td>usuario -> ' . $_SESSION["user"] . '</td>
-			</tr>';
+			$result .= '<div class="row">
+				<div class="col-12 text-center">' . $item->nombre_solapa . '</div>
+				<div class=" col-12 text-center"><a href="' . $item->url_opcion . '"  target="_blank">' . $item->nombre_opcion . '</a></div>	
+				</div>';
 		}
 
-		$template = '<table class="table-data">
-			          <tr>
-			            <th>ID</th>
-			            <th>Nombre</th>
-			          </tr>
-			          {data}
-			        </table>';
+		$template = '<div class="container text-white">
+			          <div class="row">
+			            <div class="col-9">Nombre_solapa</div>
+			            <div class="col-3 text-center">link</div>
+					  </div>
+					  
+					  {data}
+					  
+			        </div>';
 
 		return $content . str_replace('{data}', $result, $template);
 	}
@@ -824,7 +827,7 @@ function obtener_tienda($user)
 	$dbhost     = defined('DB_HOST') ? DB_HOST : '';
 	$wpdb = new wpdb($dbuser, $dbpassword, $dbname, $dbhost);
 	$items = $wpdb->get_results("SELECT id_tienda FROM usuarios_portal_tiendas where usuario = '$user'");
-	foreach ($items as $item){
+	foreach ($items as $item) {
 		$tienda = $item->id_tienda;
 	}
 	return $tienda;

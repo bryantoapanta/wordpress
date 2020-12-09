@@ -70,8 +70,8 @@ Andreas Hecht in https://www.jotform.com/blog/css-perfect-print-stylesheet-98272
   .has-regular-font-size,
   .has-large-font-size,
   .comments-header {
-    font-size: 14pt;
-    margin-top: 1cm;
+    font-size: 14pt !important;
+    margin-top: 1cm !important;
   }
 
   /* Page breaks */
