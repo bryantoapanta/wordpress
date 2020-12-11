@@ -17,3 +17,10 @@ function CtlLogin()
     } 
     include_once 'login.php';
 }
+
+function CtlCargarLinks(){
+    $datos = ModeloUserDB::obtener_links($_POST['categoria']);
+//var_dump($datos);
+    include_once 'include/links.php';
+
+}

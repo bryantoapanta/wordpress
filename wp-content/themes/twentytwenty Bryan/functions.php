@@ -803,11 +803,9 @@ function dcms_list_data($content)
 		$items = $wpdb->get_results("SELECT DISTINCT nombre_solapa FROM $table_name where id_tienda = $tienda_usuario");
 		$result = '';
 		$template = '<div class="container text-white">
-		<div class="row"> 
-			<div id="links" class="align-self-center col-6 offset-3 rounded"></div>
-		</div>
+		
 
-		<div class="row">';
+		<div id="categoria-div" class="row">';
 
 		//var_dump($items);
 
@@ -842,22 +840,4 @@ function obtener_tienda($user)
 	return $tienda;
 }
 
-function obtener_links()
-{
 
-	$table_name = 'paginas_portal'; // nombre de la tabla
-	$dbuser     = 'system';
-	$dbpassword = 'capote';
-	$dbname     = 'apoyo_luxenter';
-	$dbhost     = '82.223.11.63';
-
-	$wpdb = new wpdb($dbuser, $dbpassword, $dbname, $dbhost);
-	// nombre de los campos de la tabla
-	$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = 1");
-	/*foreach ($items as $item) {
-		$result .= '<div class="row">
-		<div class="col-12 text-center">' . $item->nombre_solapa . '</div>
-		<div class=" col-12 text-center"><a href="' . $item->url_opcion . '"  target="_blank">' . $item->nombre_opcion . '</a></div>	
-		</div>';
-	}*/
-}

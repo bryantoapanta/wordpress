@@ -45,4 +45,43 @@ class ModeloUserDB
             echo "Error -> " . $e->getMessage() . "\n";
         }
     }
+
+
+    public static function obtener_links($nombre_solapa)
+    {
+
+        $id_tienda = self::obtener_tienda($_SESSION['user']);
+        //echo $id_tienda ." ---- ".$nombre_solapa;
+
+        $stmt = self::$dbh->prepare("SELECT url_opcion , nombre_opcion , id_opcion FROM paginas_portal where id_tienda = ? and nombre_solapa = ?"); //preparo la consulta
+        $stmt->bindValue(1, $id_tienda);
+        $stmt->bindValue(2, $nombre_solapa);
+        $stmt->execute();
+        try {
+            while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $datos[$fila["id_opcion"]] = [
+                    "nombre" => $fila["nombre_opcion"],
+                    "url" => $fila["url_opcion"]
+                    ,
+                ];
+            }
+            return $datos;
+        } catch (Exception $e) {
+            echo "Error -> " . $e->getMessage() . "\n";
+        }
+        return false;
+    }
+
+    public static function obtener_tienda($user)
+    {
+        $stmt = self::$dbh->prepare("SELECT id_tienda FROM usuarios_portal_tiendas where usuario =?"); //preparo la consulta
+        $stmt->bindValue(1, $user);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        foreach ($resultado as $item) {
+            $tienda = $item;
+        }
+        return $tienda;
+    }
 }
