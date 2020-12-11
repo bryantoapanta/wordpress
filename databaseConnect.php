@@ -53,7 +53,7 @@ class ModeloUserDB
         $id_tienda = self::obtener_tienda($_SESSION['user']);
         //echo $id_tienda ." ---- ".$nombre_solapa;
 
-        $stmt = self::$dbh->prepare("SELECT url_opcion , nombre_opcion , id_opcion FROM paginas_portal where id_tienda = ? and nombre_solapa = ?"); //preparo la consulta
+        $stmt = self::$dbh->prepare("SELECT url_opcion , nombre_opcion , id_opcion FROM paginas_portal where id_tienda = ? and nombre_solapa = ? and activado = 1"); //preparo la consulta
         $stmt->bindValue(1, $id_tienda);
         $stmt->bindValue(2, $nombre_solapa);
         $stmt->execute();
