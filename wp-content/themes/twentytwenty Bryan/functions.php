@@ -200,6 +200,12 @@ function twentytwenty_register_styles()
 
 	//Estilo Bootstrap
 	wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+
+	// Add print Ajax.
+	wp_enqueue_script('ajax.js', get_template_directory_uri() . '/ajax.js',array('jquery'),'1', true );
+
+	// Add print Jquery.
+	wp_enqueue_script('jquery.js', get_template_directory_uri() . '/jquery.js');
 }
 
 add_action('wp_enqueue_scripts', 'twentytwenty_register_styles');
@@ -797,6 +803,10 @@ function dcms_list_data($content)
 		$items = $wpdb->get_results("SELECT DISTINCT nombre_solapa FROM $table_name where id_tienda = $tienda_usuario");
 		$result = '';
 		$template = '<div class="container text-white">
+		<div class="row"> 
+			<div class="col links"></div>
+		</div>
+
 		<div class="row">';
 
 		//var_dump($items);
@@ -810,16 +820,9 @@ function dcms_list_data($content)
 						
 					</div>';
 
-		// nombre de los campos de la tabla
-		$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = $tienda_usuario");
-		foreach ($items as $item) {
-			$result .= '<div class="row">
-				<div class="col-12 text-center">' . $item->nombre_solapa . '</div>
-				<div class=" col-12 text-center"><a href="' . $item->url_opcion . '"  target="_blank">' . $item->nombre_opcion . '</a></div>	
-				</div>';
-		}
 
-		return $content .  $template;
+
+		return $content .  $template; //le devolvemos el contenido + el template creado
 	}
 
 	return $$content;
@@ -837,4 +840,24 @@ function obtener_tienda($user)
 		$tienda = $item->id_tienda;
 	}
 	return $tienda;
+}
+
+function obtener_links()
+{
+
+	$table_name = 'paginas_portal'; // nombre de la tabla
+	$dbuser     = 'system';
+	$dbpassword = 'capote';
+	$dbname     = 'apoyo_luxenter';
+	$dbhost     = '82.223.11.63';
+
+	$wpdb = new wpdb($dbuser, $dbpassword, $dbname, $dbhost);
+	// nombre de los campos de la tabla
+	$items = $wpdb->get_results("SELECT * FROM $table_name where id_tienda = 1");
+	/*foreach ($items as $item) {
+		$result .= '<div class="row">
+		<div class="col-12 text-center">' . $item->nombre_solapa . '</div>
+		<div class=" col-12 text-center"><a href="' . $item->url_opcion . '"  target="_blank">' . $item->nombre_opcion . '</a></div>	
+		</div>';
+	}*/
 }
