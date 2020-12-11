@@ -804,7 +804,7 @@ function dcms_list_data($content)
 		$result = '';
 		$template = '<div class="container text-white">
 		<div class="row"> 
-			<div class="col links"></div>
+			<div id="links" class="align-self-center col-6 offset-3 rounded"></div>
 		</div>
 
 		<div class="row">';

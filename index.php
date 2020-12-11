@@ -7,6 +7,14 @@ ModeloUserDB::init();
 if (!isset($_SESSION['user'])) {
   CtlLogin();
 } else {
+
+  if (isset($_POST['accion'])) {
+    switch ($_POST['accion']) {
+      case 'mostrarLinks':
+        echo "funciona";
+        break;
+    }
+  }
   /**
    * Front to the WordPress application. This file doesn't do anything, but loads
    * wp-blog-header.php which does and tells WordPress to load the theme.
