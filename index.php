@@ -5,6 +5,15 @@ session_start();
 ModeloUserDB::init();
 
 //var_dump($_POST);
+
+if (isset($_POST['cerrar_sesion'])) {
+  switch ($_POST['cerrar_sesion']) {
+    case true:
+      CtlCerrar_Sesion();
+      break;
+  }
+}
+
 if (isset($_GET['accion'])) {
   switch ($_GET['accion']) {
     case 'mostrarLinks':

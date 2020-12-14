@@ -33,3 +33,22 @@ $(document).on("click", ".volver", (function () {
     $("#categoria-div").removeClass('disabledbutton');
 
 }));
+
+/* CERRAR SESION BOTON */
+
+$(document).on("click", ".cerrar_sesion", (function () {
+
+    if (confirm("Quieres cerrar sesion")) {
+        $.ajax({
+            url: '?', //llamamos a la funcion
+            type: 'POST', //se lo pasamos por POST
+            dataType: 'html', //tipo HTML
+            data: { cerrar_sesion: true }, //le pasamos el parametro id 
+        })
+            .done(function (resultado) {
+              
+            $(location).attr('href', "http://localhost/wordpress/");
+            });
+    }
+
+}));
