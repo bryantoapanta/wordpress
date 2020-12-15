@@ -202,7 +202,7 @@ function twentytwenty_register_styles()
 	wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 
 	// Add print Ajax.
-	wp_enqueue_script('ajax.js', get_template_directory_uri() . '/ajax.js',array('jquery'),'1', true );
+	wp_enqueue_script('ajax.js', get_template_directory_uri() . '/ajax.js', array('jquery'), '1', true);
 
 	// Add print Jquery.
 	wp_enqueue_script('jquery.js', get_template_directory_uri() . '/jquery.js');
@@ -839,5 +839,3 @@ function obtener_tienda($user)
 	}
 	return $tienda;
 }
-
-
