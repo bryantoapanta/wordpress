@@ -823,7 +823,7 @@ function dcms_list_data($content)
 		return $content .  $template; //le devolvemos el contenido + el template creado
 	}
 
-	return $$content;
+	return $content;
 }
 
 function obtener_tienda($user)
